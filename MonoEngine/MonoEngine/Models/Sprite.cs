@@ -34,7 +34,7 @@ namespace MonoEngine.Models
 
         public override void Draw(object sender, DrawingEventArgs e)
         {
-            if (_texture != null)
+            if (Visible && _texture != null)
                 e.SpriteBatch.Draw(_texture, Position, null, Color, _rotation, Origin, Scale, Effect, Depth);
         }
 

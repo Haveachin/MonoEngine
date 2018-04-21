@@ -26,6 +26,8 @@ namespace MonoEngine.Models.Graphics
 
         public SpriteEffects Effect { get; set; } = SpriteEffects.None;
 
+        public bool Visible { get; set; }
+
         public Depiction(Vector2 position)
         {
             Position = position;
@@ -34,6 +36,7 @@ namespace MonoEngine.Models.Graphics
             Scale = Vector2.One;
             Rotation = 0;
             Depth = 0;
+            Visible = true;
 
             Engine.DepictionService.Drawing += Draw;
         }

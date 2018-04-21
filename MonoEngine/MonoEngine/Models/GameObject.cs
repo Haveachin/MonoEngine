@@ -4,7 +4,7 @@ using System;
 
 namespace MonoEngine.Models
 {
-    public abstract class GameObject : IDisposable
+    public abstract class GameObject : BasicObject, IDisposable
     {
         private Vector2 _position;
         public Vector2 Position
@@ -20,7 +20,6 @@ namespace MonoEngine.Models
         }
 
         private Sprite _sprite;
-
         public Sprite Sprite
         {
             get => _sprite;
@@ -30,8 +29,6 @@ namespace MonoEngine.Models
                 _sprite.Position = Position;
             }
         }
-
-        public Depth Depth { get; set; }
 
         public GameObject(Vector2 position)
         {
@@ -45,16 +42,8 @@ namespace MonoEngine.Models
             Sprite = sprite;
         }
 
-        public GameObject(Vector2 position, Sprite sprite, Depth depth) : this(position, sprite)
-        {
-            Depth = depth;
-        }
-
         public GameObject(float x, float y) : this(new Vector2(x, y)) { }
         public GameObject(float x, float y, Sprite sprite) : this(new Vector2(x, y), sprite) { }
-        public GameObject(float x, float y, Sprite sprite, Depth depth) : this(new Vector2(x, y), sprite, depth) { }
-
-        public virtual void Update(GameTime gameTime) { }
 
         public virtual void Dispose() => this?.Sprite.Dispose();
     }

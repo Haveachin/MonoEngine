@@ -14,7 +14,7 @@ namespace MonoEngine.Services
         internal static InstanceService InstanceService;
         internal static TimeService TimeService;
 
-        public static List<GameObject> Instances => InstanceService.Instances;
+        public static List<BasicObject> Instances => InstanceService.Instances;
 
         public static void Initialize()
         {
@@ -34,7 +34,10 @@ namespace MonoEngine.Services
         public static void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             TimeService.Update(gameTime);
+
+            spriteBatch.Begin();
             DepictionService.Draw(spriteBatch);
+            spriteBatch.End();
         }
     }
 }

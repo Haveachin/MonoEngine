@@ -42,10 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Input\KeyboardHook.cs" />
     <Compile Include="Models\Graphics\Depiction.cs" />
     <Compile Include="Models\Depth.cs" />
     <Compile Include="Models\GameObject.cs" />
     <Compile Include="Models\Hitbox.cs" />
+    <Compile Include="Models\BasicObject.cs" />
     <Compile Include="Models\TextField.cs" />
     <Compile Include="Services\InstanceService.cs" />
     <Compile Include="Models\Graphics\IDepictionable.cs" />

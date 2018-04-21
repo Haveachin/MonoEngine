@@ -26,7 +26,7 @@ namespace MonoEngine.Models
 
         public override void Draw(object sender, DrawingEventArgs e)
         {
-            if (_spriteFont != null)
+            if (Visible && _spriteFont != null)
                 e.SpriteBatch.DrawString(_spriteFont, Text, Position, Color, _rotation, Origin, Scale, Effect, Depth);
         }
     }

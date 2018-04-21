@@ -9,11 +9,11 @@ namespace MonoEngine.Services
 {
     internal class InstanceService
     {
-        public List<GameObject> Instances { get; private set; }
+        public List<BasicObject> Instances { get; private set; }
 
         public InstanceService()
         {
-            Instances = new List<GameObject>();
+            Instances = new List<BasicObject>();
         }
     }
 }
