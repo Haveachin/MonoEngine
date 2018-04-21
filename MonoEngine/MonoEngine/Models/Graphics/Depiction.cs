@@ -5,7 +5,7 @@ using System;
 
 namespace MonoEngine.Models.Graphics
 {
-    public abstract class Depiction : IDepictionable
+    public abstract class Depiction : BasicObject, IDepictionable
     {
         public virtual Vector2 Position { get; set; }
 
@@ -44,5 +44,12 @@ namespace MonoEngine.Models.Graphics
         public Depiction(float x, float y) : this(new Vector2(x, y)) { }
 
         public abstract void Draw(object sender, DrawingEventArgs e);
+
+        public override void Dispose()
+        {
+            Engine.DepictionService.Drawing -= Draw;
+
+            base.Dispose();
+        }
     }
 }

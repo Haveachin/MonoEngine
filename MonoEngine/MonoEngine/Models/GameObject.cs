@@ -18,17 +18,8 @@ namespace MonoEngine.Models
                     Sprite.Position = _position;
             }
         }
-
-        private Sprite _sprite;
-        public Sprite Sprite
-        {
-            get => _sprite;
-            set
-            {
-                _sprite = value;
-                _sprite.Position = Position;
-            }
-        }
+        
+        public Sprite Sprite { get; set; }
 
         public GameObject(Vector2 position)
         {
@@ -45,6 +36,11 @@ namespace MonoEngine.Models
         public GameObject(float x, float y) : this(new Vector2(x, y)) { }
         public GameObject(float x, float y, Sprite sprite) : this(new Vector2(x, y), sprite) { }
 
-        public virtual void Dispose() => this?.Sprite.Dispose();
+        public override void Dispose()
+        {
+            this?.Sprite?.Dispose();
+
+            base.Dispose();
+        }
     }
 }

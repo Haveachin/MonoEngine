@@ -44,11 +44,13 @@
   <ItemGroup>
     <Compile Include="Extensions\Texture2DExtension.cs" />
     <Compile Include="Input\KeyboardHook.cs" />
+    <Compile Include="Models\Camera.cs" />
     <Compile Include="Models\Graphics\Depiction.cs" />
     <Compile Include="Models\Depth.cs" />
     <Compile Include="Models\GameObject.cs" />
     <Compile Include="Models\Hitbox.cs" />
     <Compile Include="Models\BasicObject.cs" />
+    <Compile Include="Models\Scene.cs" />
     <Compile Include="Models\TextField.cs" />
     <Compile Include="Services\InstanceService.cs" />
     <Compile Include="Models\Graphics\IDepictionable.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DepictionService.cs" />
     <Compile Include="Services\Engine.cs" />
+    <Compile Include="Services\SceneService.cs" />
     <Compile Include="Services\TimeService.cs" />
   </ItemGroup>
   <ItemGroup />

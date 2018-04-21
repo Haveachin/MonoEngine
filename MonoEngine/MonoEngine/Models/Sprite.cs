@@ -73,6 +73,12 @@ namespace MonoEngine.Models
                 e.SpriteBatch.Draw(_texture, Position, null, Color, _rotation, Origin, Scale, Effect, Depth);
         }
 
-        public void Dispose() => this?.Texture.Dispose();
+        public override void Dispose()
+        {
+            Hitbox = null;
+            _texture = null;
+
+            base.Dispose();
+        }
     }
 }

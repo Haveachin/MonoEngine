@@ -23,7 +23,7 @@ namespace MonoEngine.Input
 
         public void AddHotKey(Action<object, EventArgs> action, params Keys[] keys) => hotKeys.Add(keys.ToList(), action);
         
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             if (PressedKeys.Length <= 0)
                 return;

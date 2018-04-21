@@ -29,5 +29,13 @@ namespace MonoEngine.Models
             if (Visible && _spriteFont != null)
                 e.SpriteBatch.DrawString(_spriteFont, Text, Position, Color, _rotation, Origin, Scale, Effect, Depth);
         }
+
+        public override void Dispose()
+        {
+            Text = "";
+            _spriteFont = null;
+
+            base.Dispose();
+        }
     }
 }
