@@ -41,8 +41,6 @@ namespace MonoEngine.Input
                     }
                 }
 
-                Console.WriteLine($"Oh! Hello, sir. Your number is " + pressed);
-
                 if (pressed != hotKey.Key.Count)
                     return;
 

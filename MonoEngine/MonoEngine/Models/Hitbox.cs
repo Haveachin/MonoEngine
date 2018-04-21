@@ -1,60 +1,104 @@
 ﻿using Microsoft.Xna.Framework;
+using MonoEngine.Extensions;
+using System;
 
 namespace MonoEngine.Models
 {
     public class Hitbox
     {
+        private Vector2 _positon;
+        public Vector2 Position
+        {
+            get => _positon;
+            set
+            {
+                if (Sprite != null)
+                {
+                    value -= Sprite.Origin * Sprite.Scale;
+                }
+
+                _positon = value;
+            }
+        }
+
+        public Sprite Sprite { get; set; }
+
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-        public Hitbox(Sprite Sprite) : this((int)(Sprite.Texture.Width / Sprite.Scale.X), (int)(Sprite.Texture.Height / Sprite.Scale.Y)) { }
-        public Hitbox(int Width, int Height)
+        public Vector2 Size
         {
-            this.Width = Width;
-            this.Height = Height;
+            get => new Vector2(Width, Height);
+            set
+            {
+                Width = (int)value.X;
+                Height = (int)value.Y;
+            }
         }
 
-        public bool IsHit(Vector2 HitboxPosition, Vector2 Position)
+        public Hitbox(Sprite sprite) : this(sprite.Position, sprite) { }
+        public Hitbox(Vector2 position, Sprite sprite) : this(position - sprite.Origin, (int)(sprite.Texture.Width / sprite.Scale.X), (int)(sprite.Texture.Height / sprite.Scale.Y))
         {
-            if (Position.X > HitboxPosition.X + Width)
+            Sprite = sprite;
+        }
+        public Hitbox(Vector2 position, int width, int height)
+        {
+            Position = position;
+
+            Width = width;
+            Height = height;
+        }
+        public Hitbox(float x, float y, Sprite sprite) : this(new Vector2(x, y), sprite) { }
+        public Hitbox(float x, float y, int width, int height) : this(new Vector2(x, y), width, height) { }
+
+        public bool IsHit(Vector2 position)
+        {
+            if (position.X > Position.X + Width)
                 return false;
 
-            if (Position.Y > HitboxPosition.Y + Height)
+            if (position.Y > Position.Y + Height)
                 return false;
 
-            if (Position.X < HitboxPosition.X)
+            if (position.X < Position.X)
                 return false;
 
-            if (Position.Y < HitboxPosition.Y)
+            if (position.Y < Position.Y)
                 return false;
 
             return true;
         }
 
-        public bool IsHit(Vector2 HitboxPosition, Vector2 Position, Hitbox Hitbox)
+        public bool IsHit(Hitbox Hitbox)
         {
-            if (Position.X > HitboxPosition.X + Width)
+            if (Hitbox.Position.X > Position.X + Width)
                 return false;
 
-            if (Position.Y > HitboxPosition.Y + Height)
+            if (Hitbox.Position.Y > Position.Y + Height)
                 return false;
 
-            if (Position.X == Hitbox.Width && Position.Y == Hitbox.Height)
+            if (Hitbox.Position.X == Hitbox.Width && Hitbox.Position.Y == Hitbox.Height)
                 return false;
 
-            if (Position.X + Hitbox.Width < HitboxPosition.X)
+            if (Hitbox.Position.X + Hitbox.Width < Position.X)
                 return false;
 
-            if (Position.Y + Hitbox.Height < HitboxPosition.Y)
+            if (Hitbox.Position.Y + Hitbox.Height < Position.Y)
                 return false;
 
             return true;
         }
 
-        internal void OnSpriteResize(object sender, SpriteEventArgs e)
+        public void OnSpriteResize(object sender, EventArgs e)
         {
-            Width = e.Width;
-            Height = e.Height;
+            var sprite = sender as Sprite;
+
+            Size = sprite.Texture.GetSize() * sprite.Scale;
+            Position = sprite.Position; // Fixes scaling bug
+        }
+
+        public void OnSpriteReposition(object sender, EventArgs e)
+        {
+            Position = (sender as Sprite).Position;
         }
     }
 }

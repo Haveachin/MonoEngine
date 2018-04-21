@@ -7,26 +7,26 @@ namespace MonoEngine.Models.Graphics
 {
     public abstract class Depiction : IDepictionable
     {
-        public Vector2 Position { get; set; }
+        public virtual Vector2 Position { get; set; }
 
-        public Vector2 Origin { get; set; }
+        public virtual Vector2 Origin { get; set; }
 
-        public Color Color { get; set; }
+        public virtual Color Color { get; set; }
 
-        public Vector2 Scale { get; set; }
+        public virtual Vector2 Scale { get; set; }
 
         protected float _rotation;
-        public float Rotation
+        public virtual float Rotation
         {
             get => (float)(_rotation * 180 / Math.PI);
             set => _rotation = (float)(((value > 360) ? value - 360 : (value < 0) ? value + 360 : value) * 2 * Math.PI / 360);
         }
         
-        public Depth Depth { get; set; }
+        public virtual Depth Depth { get; set; }
 
-        public SpriteEffects Effect { get; set; } = SpriteEffects.None;
+        public virtual SpriteEffects Effect { get; set; } = SpriteEffects.None;
 
-        public bool Visible { get; set; }
+        public virtual bool Visible { get; set; }
 
         public Depiction(Vector2 position)
         {

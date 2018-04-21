@@ -7,7 +7,7 @@ namespace MonoEngine.Services
     {
         public static void Update(GameTime gameTime)
         {
-            Console.WriteLine($"FPS: {Math.Round(1 / gameTime.ElapsedGameTime.TotalSeconds)}");
+
         }
     }
 }

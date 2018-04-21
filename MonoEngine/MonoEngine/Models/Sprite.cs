@@ -15,12 +15,46 @@ namespace MonoEngine.Models
             set => _texture = value ?? _texture;
         }
 
+        public override Vector2 Position
+        {
+            get => base.Position;
+            set
+            {
+                base.Position = value;
+                OnSpriteReposition();
+            }
+        }
+
+        public override Vector2 Scale
+        {
+            get => base.Scale;
+            set
+            {
+                base.Scale = value;
+                OnSpriteResize();
+            }
+        }
+
+        public override Vector2 Origin
+        {
+            get => base.Origin;
+            set
+            {
+                base.Origin = value;
+                OnSpriteReposition();
+            }
+        }
+
         public Hitbox Hitbox { get; private set; }
 
-        public event EventHandler<SpriteEventArgs> SpriteResize;
+        public event EventHandler SpriteResize;
+        public event EventHandler SpriteReposition;
 
-        protected virtual void OnSpriteResize() =>
-            SpriteResize?.Invoke(this, new SpriteEventArgs() { Width = (int)(Scale.X * Texture.Width), Height = (int)(Scale.Y * Texture.Height), Scale = Scale });
+        protected virtual void OnSpriteResize()
+            => SpriteResize?.Invoke(this, EventArgs.Empty);
+
+        protected virtual void OnSpriteReposition()
+            => SpriteReposition?.Invoke(this, EventArgs.Empty);
 
         public Sprite(Vector2 position, Texture2D texture) : base(position)
         {
@@ -28,6 +62,7 @@ namespace MonoEngine.Models
             Hitbox = new Hitbox(this);
 
             this.SpriteResize += Hitbox.OnSpriteResize;
+            this.SpriteReposition += Hitbox.OnSpriteReposition;
         }
 
         public Sprite(float x, float y, Texture2D texture) : this(new Vector2(x, y), texture) { }
@@ -39,12 +74,5 @@ namespace MonoEngine.Models
         }
 
         public void Dispose() => this?.Texture.Dispose();
-    }
-
-    public class SpriteEventArgs : EventArgs
-    {
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public Vector2 Scale { get; set; }
     }
 }

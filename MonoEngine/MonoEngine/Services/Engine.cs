@@ -5,14 +5,10 @@ using System.Collections.Generic;
 
 namespace MonoEngine.Services
 {
-    /// <summary>
-    /// AES: Automated Engine Services
-    /// </summary>
     public static class Engine
     {
         internal static DepictionService DepictionService;
         internal static InstanceService InstanceService;
-        internal static TimeService TimeService;
 
         public static List<BasicObject> Instances => InstanceService.Instances;
 
@@ -20,7 +16,6 @@ namespace MonoEngine.Services
         {
             DepictionService = new DepictionService();
             InstanceService = new InstanceService();
-            TimeService = new TimeService();
         }
 
         public static void Update(GameTime gameTime)
@@ -33,8 +28,6 @@ namespace MonoEngine.Services
 
         public static void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            TimeService.Update(gameTime);
-
             spriteBatch.Begin();
             DepictionService.Draw(spriteBatch);
             spriteBatch.End();
